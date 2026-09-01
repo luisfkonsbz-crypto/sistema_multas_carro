@@ -1,0 +1,22 @@
+<DOCKTYPE html>
+<html>
+	
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Carros</title>
+	<link th:href="@{/webjars/bootstrap/5.3.8/css/bootstrap.min.css}" rel="stylesheet">
+</head>
+
+<body class="container">
+	<thead class="table table-striped">
+		<h2>ID</h2>
+		<h2>PLACA</h2>	
+	</thead>
+	<tbody class="table table-striped">
+        <tr th:each="carro : ${carros}">
+            <td th:text="${carro.id}"></td>
+            <td th:text="${carro.placa}"></td>
+        </tr>
+</body>
+
+</html>
