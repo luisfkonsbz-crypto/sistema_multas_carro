@@ -8,15 +8,18 @@
 </head>
 
 <body class="container">
-	<thead class="table table-striped">
-		<h2>ID</h2>
-		<h2>PLACA</h2>	
-	</thead>
-	<tbody class="table table-striped">
-        <tr th:each="carro : ${carros}">
-            <td th:text="${carro.id}"></td>
-            <td th:text="${carro.placa}"></td>
-        </tr>
+	<table class="table table-striped">
+		<thead class="table table-striped">
+			<h2>ID</h2>
+			<h2>PLACA</h2>	
+		</thead>
+		<tbody class="table table-striped">
+	        <tr th:each="carro : ${carros}">
+	            <td th:text="${carro.id}"></td>
+	            <td th:text="${carro.placa}"></td>
+	        </tr>
+		</tbody>
+	</table>
 </body>
 
 </html>

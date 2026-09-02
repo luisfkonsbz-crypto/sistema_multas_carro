@@ -24,6 +24,8 @@ public class CarroController {
 		// Por enquanto, vamos retornar uma lista de exemplo
 		List<Carro> carros = new ArrayList<>();
 		carros.add(new Carro(1L, "Modelo A", "ABC-1234", "Vermelho"));
+		carros.add(new Carro(2L, "Modelo B", "DEF-5678", "Azul"));
+		carros.add(new Carro(3L, "Modelo C", "HTA-2728", "Branco"));
 		return carros;
 	}
 }
