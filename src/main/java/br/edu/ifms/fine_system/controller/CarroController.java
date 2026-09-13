@@ -3,19 +3,25 @@ package br.edu.ifms.fine_system.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.edu.ifms.fine_system.model.Carro;
+import br.edu.ifms.fine_system.repository.Carros;
 
 @Controller
 public class CarroController {
+	
+	@Autowired
+	private Carros carros;
 
 	@GetMapping("/carros")
 	public ModelAndView listarCarros() {
 		ModelAndView mv = new ModelAndView("ListaCarros");
 		mv.addObject("carros", buscarCarros());
+		mv.addObject("carrosDB", carros.findAll());
 		return mv;
 	}
 	

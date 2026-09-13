@@ -16,7 +16,7 @@
 			</tr>
 		</thead>
 		<tbody class="table table-striped">
-	        <tr th:each="carro : ${carros}">
+	        <tr th:each="carro : ${carrosDB}">
 	            <td th:text="${carro.id}"></td>
 	            <td th:text="${carro.placa}"></td>
 	        </tr>
