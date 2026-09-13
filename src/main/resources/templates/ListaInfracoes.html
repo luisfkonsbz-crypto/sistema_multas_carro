@@ -8,6 +8,9 @@
 </head>
 
 <body class="container">
+	<div class "card-title">
+        <h1>LUIS FERNANDO K. BEZERRA</h1>
+	</div>
 	<table class="table table-striped">
 		<thead class="table table-striped">
 			<tr>
@@ -17,12 +20,23 @@
 			</tr>
 		</thead>
 		<tbody class="table table-striped">
-	        <tr th:each="infracao : ${infracoesDB}">
-                <td th:text="${infracao.nome}"></td>
-                <td th:text="${infracao.pontos}"></td>
+			<tr th:each="infracao : ${infracoesDB}">
                 <td th:text="${infracao.descricao}"></td>
-            </tr>
+                <td th:text="${infracao.pontos}"></td>
+                <td th:text="${infracao.valor}"></td>
+			</tr>
+			<tr th:each="infraction : ${infracoes}">
+                <td th:text="${infraction.descricao}"></td>
+                <td th:text="${infraction.pontos}"></td>
+                <td th:text="${infraction.valor}"></td>
+			</tr>
+			<tr>
+				<td>Avancar o sinal vermelho do semaforo</td>
+				<td>7</td>
+				<td>293.47</td>
+			</tr>
 		</tbody>
+		
 	</table>
 </body>
 </html>

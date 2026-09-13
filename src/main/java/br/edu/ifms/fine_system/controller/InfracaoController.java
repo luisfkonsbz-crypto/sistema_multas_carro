@@ -27,8 +27,8 @@ public class InfracaoController {
 	public List<Infracao> listarInfracoes() {
 		// Implementar lógica para listar infrações
 		List<Infracao> infracoes = new ArrayList<>();
-		infracoes.add(new Infracao(3L, "Excesso de velocidade", 5, 150.0));
-		infracoes.add(new Infracao(4L, "Estacionamento proibido", 3, 100.0));
+		infracoes.add(new Infracao(3L, "Dirigir veiculo segurando/manuseando telefone celular", 7, 293.47));
+		infracoes.add(new Infracao(4L, "Estacionar nos acostamentos", 3, 88.38));
 		return infracoes;
 	}
 
