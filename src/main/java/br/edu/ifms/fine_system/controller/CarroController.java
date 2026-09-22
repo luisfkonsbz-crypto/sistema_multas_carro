@@ -10,21 +10,27 @@ import org.springframework.web.servlet.ModelAndView;
 
 import br.edu.ifms.fine_system.model.Carro;
 import br.edu.ifms.fine_system.repository.Carros;
+import br.edu.ifms.fine_system.service.CarroService;
 
 @Controller
 public class CarroController {
 	
 	@Autowired
-	private Carros carros;
+	private CarroService carroService;
 
 	@GetMapping("/carros")
 	public ModelAndView listarCarros() {
 		ModelAndView mv = new ModelAndView("ListaCarros");
-		mv.addObject("carros", buscarCarros());
-		mv.addObject("carrosDB", carros.findAll());
+		
+		//mv.addObject("carros", buscarCarros()); // Chamada do método buscarCarros() para obter a lista de carros
+		//mv.addObject("carrosDB", carros.findAll());
+		
+		mv.addObject("carrosDB", carroService.buscarTodos());
+		
 		return mv;
 	}
 	
+	/*
 	public List<Carro> buscarCarros() {
 		// Aqui você pode implementar a lógica para buscar os carros do banco de dados
 		// Por enquanto, vamos retornar uma lista de exemplo
@@ -34,4 +40,6 @@ public class CarroController {
 		carros.add(new Carro(3L, "Modelo C", "HTA-2728", "Branco"));
 		return carros;
 	}
+	*/
+	
 }

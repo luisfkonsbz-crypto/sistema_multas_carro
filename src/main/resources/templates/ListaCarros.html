@@ -8,6 +8,13 @@
 </head>
 
 <body class="container">
+	<form method="POST" th:object="${carro}" th:action="@{/carros}">
+        <div class="mb-3">
+            <label for="placa" class="form-label">Placa:</label>
+            <input type="text" id="placa" th:field="*{placa}" class="form-control">
+        </div>
+        <button type="submit" class="btn btn-primary">Adicionar Carro</button>
+	</form>
 	<table class="table table-striped">
 		<thead class="table table-striped">
 			<tr>
