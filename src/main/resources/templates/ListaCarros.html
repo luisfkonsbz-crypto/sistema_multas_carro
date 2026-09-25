@@ -28,8 +28,8 @@
 	        <tr th:each="carro : ${carrosDB}">
 	            <td th:text="${carro.id}"></td>
 	            <td th:text="${carro.placa}"></td>
-				<td><a th:href="@{/carros/editar/{id}(id=${carro.id})}" class="btn btn-warning">Editar</a>
-				<td><a th:href="@{/carros/excluir/{id}(id=${carro.id})}" class="btn btn-danger">Excluir</a></td>
+				<td><a th:href="@{/carros/{id}(id=${carro.id})}" class="btn btn-warning">Editar</a>
+				<td><a th:href="@{/carros/deletar/{id}(id=${carro.id})}" class="btn btn-danger">Excluir</a></td>
 	        </tr>
 		</tbody>
 	</table>

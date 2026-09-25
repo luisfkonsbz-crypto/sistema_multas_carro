@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -25,7 +26,6 @@ public class CarroController {
 		ModelAndView mv = new ModelAndView("ListaCarros");
 		
 		//mv.addObject("carros", buscarCarros()); // Chamada do método buscarCarros() para obter a lista de carros
-		//mv.addObject("carrosDB", carros.findAll());
 		
 		mv.addObject("carrosDB", carroService.buscarTodos());
 		mv.addObject("carro", new Carro());
@@ -38,6 +38,19 @@ public class CarroController {
 		carroService.salvar(carro);
 		return "redirect:/carros";
 	}
+	
+    @GetMapping("/carros/{id}")
+    public ModelAndView editar(@PathVariable("id") Long id) {
+        ModelAndView modelAndView = new ModelAndView("EditaCarros");
+        modelAndView.addObject(carroService.procurar(id));
+        return modelAndView;
+    }
+
+    @GetMapping("/carros/deletar/{id}")
+    public String deletar(@PathVariable("id") Long id) {
+        carroService.deletar(id);
+        return "redirect:/carros";
+    }
 	
 	/*
 	public List<Carro> buscarCarros() {
