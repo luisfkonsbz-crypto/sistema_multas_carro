@@ -21,19 +21,15 @@
 			</tr>
 		</thead>
 		<tbody class="table table-striped">
-			<tr th:each="infracao : ${infracoesDB}">
-                <td th:text="${infracao.descricao}"></td>
-                <td th:text="${infracao.pontos}"></td>
-                <td th:text="${infracao.valor}"></td>
-				<td>
-                    <a th:href="@{/infracoes/{id}(id=${infracao.id})}" class="btn btn-primary">Editar</a>
-                    <a th:href="@{/infracoes/excluir/{id}(id=${infracao.id})}" class="btn btn-danger">Excluir</a>
-				</td>
-			</tr>
 			<tr th:each="infraction : ${infracoes}">
                 <td th:text="${infraction.descricao}"></td>
                 <td th:text="${infraction.pontos}"></td>
                 <td th:text="${infraction.valor}"></td>
+				<td> 
+                    <a th:href="@{/infracoes/{id}(id=${infraction.id})}" class="btn btn-warning">Editar</a>
+					<a th:href="@{/infracoes/deletar/{id}(id=${infraction.id})}" class="btn btn-danger">Excluir</a>
+
+				</td>
 			</tr>
 			<tr>
 				<td>Avancar o sinal vermelho do semaforo</td>
