@@ -4,24 +4,26 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 import br.edu.ifms.fine_system.model.Infracao;
-import br.edu.ifms.fine_system.repository.Infracoes;
+
 
 import java.util.ArrayList;
 import java.util.List;
+import br.edu.ifms.fine_system.service.InfracaoService;
 
 @Controller
 public class InfracaoController {
 	
 	@Autowired
-	private Infracoes infracoes;
+	private InfracaoService infracoes;
 
 	@GetMapping("/infracoes")
 	public ModelAndView ListarInfracoes() {
 		ModelAndView mv = new ModelAndView("ListaInfracoes");
 		mv.addObject("infracoes", listarInfracoes());
-		mv.addObject("infracoesDB", infracoes.findAll());
+		mv.addObject("infracoesDB", infracoes.buscarTodos());
 		return mv;
 	}
 	
@@ -36,13 +38,19 @@ public class InfracaoController {
 	@GetMapping("/infracoes/{id}")
 	public ModelAndView editar(@PathVariable("id") Long id) {
 		ModelAndView modelAndView = new ModelAndView("EditaInfracoes");
-		modelAndView.addObject(infracoes.findById(id).orElse(null));
+		modelAndView.addObject(infracoes.procurar(id));
 		return modelAndView;
 	}
 	
 	@GetMapping("/infracoes/deletar/{id}")
 	public String deletar(@PathVariable("id") Long id) {
-		infracoes.deleteById(id);
+		infracoes.deletar(id);
+		return "redirect:/infracoes";
+	}
+	
+	@PostMapping("/infracoes")
+	public String salvar(Infracao infracao) {
+		infracoes.salvar(infracao);
 		return "redirect:/infracoes";
 	}
 
