@@ -21,5 +21,13 @@ public class InfracaoService {
 	public List<Infracao> buscarTodos(){
 		return infracoes.findAll();
 	}
+	
+	public Infracao salvar(Infracao infracao) {
+		return infracoes.save(infracao);
+	}
+	
+	public Infracao procurar(Long id) {
+		return infracoes.findById(id).orElse(null);
+	}
 
 }
