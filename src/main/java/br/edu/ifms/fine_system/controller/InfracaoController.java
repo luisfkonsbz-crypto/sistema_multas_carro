@@ -3,6 +3,7 @@ package br.edu.ifms.fine_system.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -41,7 +42,7 @@ public class InfracaoController {
 	@GetMapping("/infracoes/{id}")
 	public ModelAndView editar(@PathVariable("id") Long id) {
 		ModelAndView modelAndView = new ModelAndView("EditaInfracoes");
-		modelAndView.addObject(infracoes.procurar(id));
+		modelAndView.addObject("infracao", infracoes.procurar(id));
 		return modelAndView;
 	}
 	
@@ -52,7 +53,7 @@ public class InfracaoController {
 	}
 	
 	@PostMapping("/infracoes")
-	public String salvar(Infracao infracao) {
+	public String salvar(@ModelAttribute Infracao infracao) {
 		infracoes.salvar(infracao);
 		return "redirect:/infracoes";
 	}
