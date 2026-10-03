@@ -22,8 +22,11 @@ public class InfracaoController {
 	@GetMapping("/infracoes")
 	public ModelAndView ListarInfracoes() {
 		ModelAndView mv = new ModelAndView("ListaInfracoes");
-		mv.addObject("infracoes", listarInfracoes());
+		//mv.addObject("infracoes", listarInfracoes());
+		
 		mv.addObject("infracoesDB", infracoes.buscarTodos());
+		mv.addObject("infracao", new Infracao());
+		
 		return mv;
 	}
 	
