@@ -8,6 +8,9 @@
 </head>
 
 <body class="container">
+	
+	<div th:insert="Menu :: menu"></div>
+	
 	<form method="POST" th:object="${carro}" th:action="@{/carros}">
         <div class="mb-3">
             <label for="placa" class="form-label">Placa:</label>
