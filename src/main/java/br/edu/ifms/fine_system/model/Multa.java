@@ -6,6 +6,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
 @Entity
@@ -19,9 +20,11 @@ public class Multa implements Serializable {
 	private String cidade;
 	
 	@ManyToOne
+	@JoinColumn(name = "carro_id")
 	private Carro carro;
 	
 	@ManyToOne
+	@JoinColumn(name = "infracao_id")
 	private Infracao infracao;
 	
 	public Multa() {
