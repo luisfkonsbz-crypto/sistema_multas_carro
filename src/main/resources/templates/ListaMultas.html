@@ -1,71 +1,117 @@
-<DOCKTYPE HTML>
-<html>
-	<head>
-        <meta charset="UTF-8">
-        <title>Lista de Multas</title>
-		 <link th:href="@{/webjars/bootstrap/5.3.8/css/bootstrap.min.css}" rel="stylesheet">
-	</head>
-	
-	<body>
-		<div th:insert="Menu :: menu"></div>
-		
-		<!-- Cadastrar Multas - associando 'carro' à 'infracao' (selecionar do que já está cadastrado -->
-		<div class="card shadow-sm border-0 rounded-3 mb-4">
-            <div class="card-header bg-primary text-white">
-				<h5 class="card-title mb-0 fw-bold">Cadastrar Multa</h5>
-			</div>
-			<div class="card-body p-4">
-                <form th:action="@{/multas}" th:object="${multa}" method="POST">
-                    
-                    <div class="mb-3">
-                        <label for="infracao" class="form-label fw-semibold">Infração</label>
-                        <select th:field="*{infracao}" id="infracao" class="form-select" required>
-                            <option th:each="infracao : ${infracoes}" th:value="${infracao.id}" th:text="${infracao.descricao}"></option>
-                        </select>
-                    </div>
 
-                    <div class="mb-3">
-                        <label for="carro" class="form-label fw-semibold">Carro</label>
-                        <select th:field="*{carro}" id="carro" class="form-select" required>
-                            <option th:each="carro : ${carros}" th:value="${carro.id}" th:text="${carro.placa}"></option>
-                        </select>
-                    </div>
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Multas</title>
+    <link th:href="@{/webjars/bootstrap/5.3.8/css/bootstrap.min.css}" rel="stylesheet">
+</head>
 
-                    <div class="d-grid gap-2">
-                        <button type="submit" class="btn btn-primary fw-bold py-2">
-                            Cadastrar Multa
-                        </button>
-                    </div>
+<body class="container">
 
-                </form>
-			</div>
-		</div>															
-			
-			
-        <h1>Lista de Multas</h1>
-        <table border="1">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Descrição</th>
-                    <th>Valor</th>
-                    <th>Placa</th>
-					<th>Cidade</th>
-					<th>Ano</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Aqui você pode adicionar as linhas da tabela com os dados das multas - incluindo relacoes com Carro e Infracao -->
-				<tr th:each="multa : ${multas}">
-                    <td th:text="${multa.id}"></td>
-                    <td th:text="${multa.infracao.descricao}"></td>
-                    <td th:text="${multa.infracao.valor}"></td>
-                    <td th:text="${multa.carro.placa}"></td>
-					<td th:text="${multa.cidade}"></td>
-					<td th:text="${multa.ano}"></td>
-                </tr>
-				
-            </tbody>
-        </table>
-    </body>		
+    <div th:insert="Menu :: menu"></div>
+
+    <h3 class="mt-4">Cadastrar Multa</h3>
+
+    <form method="POST" th:object="${multa}" th:action="@{/multas}">
+
+        <div class="mb-3">
+            <label for="infracao" class="form-label">Infração:</label>
+            <select th:field="*{infracao}" id="infracao" class="form-select" required>
+                <option value="">-- Selecione uma Infração --</option>
+                <option th:each="infracao : ${infracoes}"
+                        th:value="${infracao.id}"
+                        th:text="${infracao.descricao}">
+                </option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="carro" class="form-label">Carro (Placa):</label>
+            <select th:field="*{carro}" id="carro" class="form-select" required>
+                <option value="">-- Selecione um Carro --</option>
+                <option th:each="carro : ${carros}"
+                        th:value="${carro.id}"
+                        th:text="${carro.placa}">
+                </option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="cidade" class="form-label">Cidade da Ocorrência:</label>
+            <input type="text" id="cidade" th:field="*{cidade}"
+                   class="form-control" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="ano" class="form-label">Ano da Ocorrência:</label>
+            <input type="number" id="ano" th:field="*{ano}"
+                   class="form-control" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary">
+            Cadastrar Multa
+        </button>
+
+    </form>
+
+    <br>
+
+    <h3>Multas Registradas</h3>
+
+    <table class="table table-striped">
+
+        <thead class="table table-striped">
+            <tr>
+                <th>ID</th>
+                <th>DESCRIÇÃO</th>
+                <th>VALOR</th>
+                <th>PLACA</th>
+                <th>CIDADE</th>
+                <th>ANO</th>
+                <th>EDITAR</th>
+                <th>EXCLUIR</th>
+            </tr>
+        </thead>
+
+        <tbody class="table table-striped">
+
+            <tr th:each="multa : ${multas}">
+
+                <td th:text="${multa.id}"></td>
+
+                <td th:text="${multa.infracao?.descricao}"></td>
+
+                <td th:text="${'R$ ' + multa.infracao?.valor}"></td>
+
+                <td th:text="${multa.carro?.placa}"></td>
+
+                <td th:text="${multa.cidade}"></td>
+
+                <td th:text="${multa.ano}"></td>
+
+                <!-- Botão Editar -->
+                <td>
+                    <a th:href="@{/multas/{id}(id=${multa.id})}"
+                       class="btn btn-warning">
+                        Editar
+                    </a>
+                </td>
+
+                <!-- Botão Excluir -->
+                <td>
+                    <a th:href="@{/multas/deletar/{id}(id=${multa.id})}"
+                       class="btn btn-danger"
+                       onclick="return confirm('Deseja realmente excluir esta multa?')">
+                        Excluir
+                    </a>
+                </td>
+
+            </tr>
+
+        </tbody>
+
+    </table>
+
+</body>
 </html>
