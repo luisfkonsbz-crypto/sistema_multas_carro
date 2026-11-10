@@ -44,6 +44,9 @@ public class MultaController {
 	public ModelAndView editar(@PathVariable("id") Long id) {
 		ModelAndView modelAndView = new ModelAndView("EditaMultas");
 		modelAndView.addObject(multaService.procurar(id));
+		modelAndView.addObject("infracoes", infracaoService.buscarTodos());
+		modelAndView.addObject("carros", carroService.buscarTodos());
+		modelAndView.addObject("multa", multaService.procurar(id)); // Adiciona o objeto Multa existente para o formulário de edição
 		return modelAndView;
 	}
 

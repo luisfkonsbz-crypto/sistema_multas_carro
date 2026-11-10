@@ -10,7 +10,8 @@
 		<div th:insert="Menu :: menu"></div>
 		
 		<h3>Editar Multa</h3>
-		<form method="POST" th:object="${multa}" th:action="@{/multas/editar/{id}(id=${multa.id})}">
+		<form method="POST" th:object="${multa}" th:action="@{/multas}">
+			<input type="hidden" th:field="*{id}" /> <!-- hidden serve para  -->
             <div class="mb-3">
                 <label for="infracao" class="form-label">Infração:</label>
                 <select th:field="*{infracao}" id="infracao" class="form-select" required>
